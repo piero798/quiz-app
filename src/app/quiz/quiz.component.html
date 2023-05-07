@@ -1,0 +1,24 @@
+<div class="container">
+  <span>QUIZ MAKER</span>
+  <div class="create-container">
+    <select id="categorySelect" [(ngModel)]="categorySelected">
+      <option [ngValue]="undefined" disabled selected>Select a category</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
+    </select>
+    <select id="difficultySelect" [(ngModel)]="difficultySelected">
+      <option [ngValue]="undefined" disabled selected>Select difficulty</option>
+      <option ngValue="easy">Easy</option>
+      <option ngValue="medium">Medium</option>
+      <option ngValue="hard">Hard</option>
+    </select>
+    <button id="createBtn" class="create" (click)="onCreate()">Create</button>
+  </div>
+  <div class="questions-container">
+    <div *ngFor="let question of questions" class="question-container">
+      <span class="question">{{ question?.question }}</span>
+      <button *ngFor="let answer of question?.answers; let i = index" class="answer" (click)="onSelectedAnswer(question, i)"
+        [class.selected]="question.selectedAnswer === i">{{ answer }}</button>
+    </div>
+  </div>
+  <button *ngIf="canSubmit" (click)="onSubmit()">Submit</button>
+</div>
