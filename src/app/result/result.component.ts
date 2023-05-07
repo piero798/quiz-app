@@ -9,7 +9,13 @@ import { TriviaService } from '../services/trivia.service';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
+  /**
+   * Questions
+   */
   public questions: Question[] = [];
+  /**
+   * Score
+   */
   public score = 0;
 
   constructor(
@@ -19,16 +25,14 @@ export class ResultComponent implements OnInit {
 
   public ngOnInit(): void {
     this.questions = this._triviaService.submittedAnswers;
-    this.score = this.getScore();
+    this.score = this.questions.filter(q => q.selectedAnswer === q.correctAnswer).length;
   }
 
-  
+  /**
+   * Creates a new quiz
+   */
   public newQuiz() {
     this._triviaService.submittedAnswers = [];
     this.router.navigate(['/quiz']);
-  }
-
-  private getScore() {
-    return this.questions.filter(q => q.selectedAnswer === q.correctAnswer).length;
   }
 }

@@ -15,17 +15,27 @@ export class TriviaService {
    */
   private readonly _questionsUrl = 'https://opentdb.com/api.php';
   /**
-   *
+   * Submitted answers
    */
   public submittedAnswers: Question[] = [];
 
   constructor(private _httpClient: HttpClient) { }
 
+  /**
+   * Gets categories
+   * @returns Categories
+   */
   public async getCategories(): Promise<Category[]> {
     const response = await this._httpClient.get<RawCategory>(this._categoryUrl).toPromise();
     return response && response.trivia_categories || [];
   }
 
+  /**
+   * Gets questions
+   * @param category Category id
+   * @param difficulty Difficulty
+   * @returns Questions based on category and difficulty
+   */
   public async getQuestions(category: number, difficulty: string): Promise<Question[]> {
     const params = new HttpParams()
       .set('amount', '5')
@@ -34,10 +44,15 @@ export class TriviaService {
       .set('type', 'multiple');
     const response = await this._httpClient.get<RawQuestions>(this._questionsUrl, { params }).toPromise();
     const results = response && response.results || [];
-    return results.map(r => this.getQuestion(r));
+    return results.map(r => this.mapQuestion(r));
   }
 
-  private getQuestion(rawQuestion: RawQuestion): Question {
+  /**
+   * Maps raw question
+   * @param rawQuestion Raw question
+   * @returns Question
+   */
+  private mapQuestion(rawQuestion: RawQuestion): Question {
     const { correct_answer, incorrect_answers, question } = rawQuestion;
     const answersLength = incorrect_answers.length + 1;
     const answerPosition = Math.floor(Math.random() * answersLength);
