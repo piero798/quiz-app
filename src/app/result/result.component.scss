@@ -1,20 +1,53 @@
 :host {
-  .wrong {
-    background-color: red;
-  }
-  .correct {
-    background-color: green;
+  .answer {
+    cursor: default;
+
+    &:hover {
+      color: #198754;
+      background: transparent;
+    }
+
+    &.wrong {
+      background-color: #dc3545;
+      color: white;
+
+      &:hover {
+        background-color: #dc3545;
+        color: white;
+      }
+    }
+
+    &.correct {
+      background-color: #198754;
+      color: white;
+
+      &:hover {
+        background-color: #198754;
+        color: white;
+      }
+    }
   }
 
-  .low {
-    background-color: red;
-  }
+  .score {
+    width: 500px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: 'Verdana';
+    color: white;
 
-  .medium {
-    background-color: yellow;
-  }
+    &.low {
+      background-color: #dc3545;
+    }
 
-  .high {
-    background-color: green;
+    &.medium {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    &.high {
+      background-color: #198754;
+    }
   }
 }

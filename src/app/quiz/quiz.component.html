@@ -1,24 +1,26 @@
 <div class="container">
-  <span>QUIZ MAKER</span>
+  <span class="title">QUIZ MAKER</span>
   <div class="create-container">
-    <select id="categorySelect" [(ngModel)]="categorySelected">
+    <select id="categorySelect" [(ngModel)]="categorySelected" class="select category">
       <option [ngValue]="undefined" disabled selected>Select a category</option>
       <option *ngFor="let category of categories" [ngValue]="category.id">{{category.name}}</option>
     </select>
-    <select id="difficultySelect" [(ngModel)]="difficultySelected">
+    <select id="difficultySelect" [(ngModel)]="difficultySelected" class="select">
       <option [ngValue]="undefined" disabled selected>Select difficulty</option>
       <option ngValue="easy">Easy</option>
       <option ngValue="medium">Medium</option>
       <option ngValue="hard">Hard</option>
     </select>
-    <button id="createBtn" class="create" (click)="onCreate()">Create</button>
+    <button id="createBtn" class="btn create" (click)="onCreate()">Create</button>
   </div>
   <div class="questions-container">
     <div *ngFor="let question of questions" class="question-container">
       <span [innerHTML]="question?.question" class="question"></span>
-      <button *ngFor="let answer of question?.answers; let i = index" class="answer" [innerHTML]="answer" (click)="onSelectedAnswer(question, i)"
-        [class.selected]="question.selectedAnswer === i"></button>
+      <div class="answers-container">
+        <button *ngFor="let answer of question?.answers; let i = index" class="btn answer" [innerHTML]="answer"
+          (click)="onSelectedAnswer(question, i)" [class.selected]="question.selectedAnswer === i"></button>
+      </div>
     </div>
   </div>
-  <button *ngIf="canSubmit" (click)="onSubmit()">Submit</button>
+  <button class="btn submit" *ngIf="canSubmit" (click)="onSubmit()">Submit</button>
 </div>

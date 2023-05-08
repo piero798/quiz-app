@@ -1,15 +1,17 @@
 <div class="container">
-  <span>RESULTS</span>
+  <span class="title">RESULTS</span>
   <div class="questions-container">
     <div *ngFor="let question of questions" class="question-container">
       <span [innerHTML]="question?.question" class="question"></span>
-      <button *ngFor="let answer of question?.answers; let i = index" class="answer" [innerHTML]="answer"
-        [class.wrong]="question.selectedAnswer === i && question.selectedAnswer !== question.correctAnswer"
-        [class.correct]="(question.selectedAnswer === i && question.selectedAnswer === question.correctAnswer) || (question.correctAnswer === i)"></button>
+      <div class="answers-container">
+        <button *ngFor="let answer of question?.answers; let i = index" class="btn answer" [innerHTML]="answer"
+          [class.wrong]="question.selectedAnswer === i && question.selectedAnswer !== question.correctAnswer"
+          [class.correct]="(question.selectedAnswer === i && question.selectedAnswer === question.correctAnswer) || (question.correctAnswer === i)"></button>
+      </div>
     </div>
   </div>
-  <span [ngClass]="{'low': score <= 1, 'medium': score === 2 || score === 3, 'high': score > 3 }">
+  <span class="score" [ngClass]="{'low': score <= 1, 'medium': score === 2 || score === 3, 'high': score > 3 }">
     You scored {{ score }} out of 5
   </span>
-  <button (click)="newQuiz()">Create a new quiz</button>
+  <button class="btn submit" (click)="newQuiz()">Create a new quiz</button>
 </div>
