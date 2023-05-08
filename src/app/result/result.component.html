@@ -2,10 +2,10 @@
   <span>RESULTS</span>
   <div class="questions-container">
     <div *ngFor="let question of questions" class="question-container">
-      <span class="question">{{ question?.question }}</span>
-      <button *ngFor="let answer of question?.answers; let i = index" class="answer"
+      <span [innerHTML]="question?.question" class="question"></span>
+      <button *ngFor="let answer of question?.answers; let i = index" class="answer" [innerHTML]="answer"
         [class.wrong]="question.selectedAnswer === i && question.selectedAnswer !== question.correctAnswer"
-        [class.correct]="(question.selectedAnswer === i && question.selectedAnswer === question.correctAnswer) || (question.correctAnswer === i)">{{ answer }}</button>
+        [class.correct]="(question.selectedAnswer === i && question.selectedAnswer === question.correctAnswer) || (question.correctAnswer === i)"></button>
     </div>
   </div>
   <span [ngClass]="{'low': score <= 1, 'medium': score === 2 || score === 3, 'high': score > 3 }">

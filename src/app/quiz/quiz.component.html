@@ -15,9 +15,9 @@
   </div>
   <div class="questions-container">
     <div *ngFor="let question of questions" class="question-container">
-      <span class="question">{{ question?.question }}</span>
-      <button *ngFor="let answer of question?.answers; let i = index" class="answer" (click)="onSelectedAnswer(question, i)"
-        [class.selected]="question.selectedAnswer === i">{{ answer }}</button>
+      <span [innerHTML]="question?.question" class="question"></span>
+      <button *ngFor="let answer of question?.answers; let i = index" class="answer" [innerHTML]="answer" (click)="onSelectedAnswer(question, i)"
+        [class.selected]="question.selectedAnswer === i"></button>
     </div>
   </div>
   <button *ngIf="canSubmit" (click)="onSubmit()">Submit</button>

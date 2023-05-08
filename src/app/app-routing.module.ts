@@ -10,7 +10,7 @@ const routes: Routes = [
   // { path: 'result/:questions', component: ResultComponent },
   { path: 'result', component: ResultComponent, canActivate: [SubmitGuard] },
   { path: '', redirectTo: '/quiz', pathMatch: 'full' },
-  { path: '**', component: QuizComponent },
+  { path: '**', redirectTo: '/quiz' },
 ];
 
 @NgModule({
