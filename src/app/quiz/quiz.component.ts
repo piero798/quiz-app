@@ -65,8 +65,6 @@ export class QuizComponent implements OnInit {
   public onSubmit(): void {
     this._triviaService.submittedAnswers = this.questions;
     this.router.navigate(['/result']);
-    // this.router.navigate(['/result/' + this.questions]);
-    // this.router.navigate(['/result'], { queryParams: { questions: this.questions } });
   }
 
 }

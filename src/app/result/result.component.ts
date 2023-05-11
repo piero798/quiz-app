@@ -25,6 +25,7 @@ export class ResultComponent implements OnInit {
 
   public ngOnInit(): void {
     this.questions = this._triviaService.submittedAnswers;
+    this._triviaService.submittedAnswers = [];
     this.score = this.questions.filter(q => q.selectedAnswer === q.correctAnswer).length;
   }
 
@@ -32,7 +33,6 @@ export class ResultComponent implements OnInit {
    * Creates a new quiz
    */
   public newQuiz() {
-    this._triviaService.submittedAnswers = [];
     this.router.navigate(['/quiz']);
   }
 }
