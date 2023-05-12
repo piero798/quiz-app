@@ -10,6 +10,14 @@ import { Category, Question } from './../models';
 })
 export class QuizComponent implements OnInit {
   /**
+   * Amount of questions
+   */
+  private readonly _amountOfQuestions = 5;
+  /**
+   * Questions type
+   */
+  private readonly _questionType = 'multiple';
+  /**
    * Specifies if the user can submit
    */
   public canSubmit = false;
@@ -25,6 +33,10 @@ export class QuizComponent implements OnInit {
    * Difficulty selected
    */
   public difficultySelected: string;
+  /**
+   * Specifies if is loading the questions
+   */
+  public isLoadingQuestions = false;
   /**
    * Questions
    */
@@ -45,7 +57,9 @@ export class QuizComponent implements OnInit {
   public async onCreate(): Promise<void> {
     if (this.categorySelected && this.difficultySelected) {
       this.canSubmit = false;
-      this.questions = await this._triviaService.getQuestions(this.categorySelected, this.difficultySelected);
+      this.isLoadingQuestions = true;
+      this.questions = await this._triviaService.getQuestions(this._amountOfQuestions, this.categorySelected, this.difficultySelected, this._questionType);
+      this.isLoadingQuestions = false;
     }
   }
 

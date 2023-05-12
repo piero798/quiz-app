@@ -36,12 +36,12 @@ export class TriviaService {
    * @param difficulty Difficulty
    * @returns Questions based on category and difficulty
    */
-  public async getQuestions(category: number, difficulty: string): Promise<Question[]> {
+  public async getQuestions(amount: number, category: number, difficulty: string, questionType: 'multiple' | 'boolean'): Promise<Question[]> {
     const params = new HttpParams()
-      .set('amount', '5')
+      .set('amount', amount.toString())
       .set('category', category.toString())
       .set('difficulty', difficulty)
-      .set('type', 'multiple');
+      .set('type', questionType);
     const response = await this._httpClient.get<RawQuestions>(this._questionsUrl, { params }).toPromise();
     const results = response && response.results || [];
     return results.map(r => this.mapQuestion(r));

@@ -5,8 +5,8 @@
       <span [innerHTML]="question?.question" class="question"></span>
       <div class="answers-container">
         <button *ngFor="let answer of question?.answers; let i = index" class="btn answer" [innerHTML]="answer"
-          [class.wrong]="question.selectedAnswer === i && question.selectedAnswer !== question.correctAnswer"
-          [class.correct]="(question.selectedAnswer === i && question.selectedAnswer === question.correctAnswer) || (question.correctAnswer === i)"></button>
+          [class.wrong]="question?.selectedAnswer === i && question?.selectedAnswer !== question?.correctAnswer"
+          [class.correct]="(question?.selectedAnswer === i && question?.selectedAnswer === question?.correctAnswer) || (question?.correctAnswer === i)"></button>
       </div>
     </div>
   </div>
